@@ -1,27 +1,27 @@
 [
 	{
 		"user":{"name":"friend","id":123},
-		"recieved":{"date":"11/5/2017", "time":"14:45"},
+		"recieved":{"date":"5/11/2017", "time":"14:45"},
 		"content":"Hey, it was very good seeing you!"
 	},
 	{
 		"user":{"name":"different friend","id":124},
-		"recieved":{"date":"11/5/2017", "time":"12:00"},
+		"recieved":{"date":"5/5/2017", "time":"12:00"},
 		"content":"Hey, where were you last night?!"
 	},
 	{
 		"user":{"name":"maor","id":222},
-		"recieved":{"date":"11/5/2017", "time":"15:54"},
+		"recieved":{"date":"5/11/2017", "time":"15:54"},
 		"content":"Have you seen Sense8 yet?!"
 	},
 	{
 		"user":{"name":"maor","id":222},
-		"recieved":{"date":"14/5/2017", "time":"16:00"},
+		"recieved":{"date":"5/14/2017", "time":"16:00"},
 		"content":"you should come by"
 	},
 	{
 		"user":{"name":"friend","id":123},
-		"recieved":{"date":"13/5/2017", "time":"18:00"},
+		"recieved":{"date":"5/13/2017", "time":"18:00"},
 		"content":"We should watch The Avengers together"
 	}
 ]
