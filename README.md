@@ -51,9 +51,13 @@ user_name String
 
 **Parameters**
 user_id int *Optional, priority to username*
+
 user_name String *Optional*
+
 from_date String *required* format: mm/dd/yy
+
 to_date String *Optional* - if you want to limit your results
+
 **/userMessages_date/**
 
 **Response** : JSON
