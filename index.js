@@ -3,38 +3,37 @@ const express = require ('express'),
 	  bodyParser = require('body-parser'),
 	  app = express(),
 	  port = process.env.PORT || 3000,
-	  data = require('./data/messages.json');
+	  privateMessages = require('./privateMessages/');
+var messages = new privateMessages();
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-/*app.all('*',
+app.all('*',
 		(req, res, next) => {
 			console.log("runs for all HTTP verbs first");
 			next();
-		});*/
+		});
 
-/*app.get('/getMusicName/:music_id',
+app.get('/allMessages',
 	(req,res) => {
-		var music_id = req.params.music_id;
-		console.log(`get: ${req.params.music_id}`);
-		res.status(200).json({"music-name":data.name});
-	});
-
-app.put('/products/:prod_id',
-	(req,res) => {
-		x`console.log('put: ${req.params.prod_id}');
-		res.json({prod_id: req.params.prod_id});
+		console.log(`get: all messages`);
+		res.status(200).json(messages.getAllMessages());
 	});
 
 
-app.post('/savemusic/',
+app.post('/userMessages_id/',
 	(req,res) => {
-		var songs = req.body.songs;
-		console.log(`post: ${req.body.songs}`);
-		res.json({'success': 1});
-	});*/
+		console.log(`get messages of: ${req.body.user_id}`);
+		res.status(200).json(messages.getMessagesById(req.body.user_id));
+	});
+
+app.post('/userMessages_name/',
+	(req,res) => {
+		console.log(`get messages of: ${req.body.user_name}`);
+		res.status(200).json(messages.getMessagesByUsername(req.body.user_name));
+	});
 
 app.listen(port,
 	() => {
