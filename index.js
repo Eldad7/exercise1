@@ -3,7 +3,7 @@ const express = require ('express'),
 	  bodyParser = require('body-parser'),
 	  app = express(),
 	  port = process.env.PORT || 3000,
-	  data = require('./data/music.json');
+	  data = require('./data/messages.json');
 
 
 app.use(bodyParser.json());
