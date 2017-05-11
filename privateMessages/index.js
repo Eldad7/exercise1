@@ -62,7 +62,7 @@ class Messages{
 			flag_username=true;
 		if (toDate!=null){
 			flag_to = true;
-			to = new Date(toDate).getTime();		
+			to = new Date(toDate).getTime();	
 			if (from>=to)
 				return {"error id": '006',"error message": "Wrong parameters - From date can't be greater than to date"};
 		}
