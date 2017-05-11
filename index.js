@@ -10,12 +10,6 @@ var messages = new privateMessages();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.all('*',
-		(req, res, next) => {
-			console.log("runs for all HTTP verbs first");
-			next();
-		});
-
 app.get('/allMessages',
 	(req,res) => {
 		console.log(`get: all messages`);
@@ -40,6 +34,13 @@ app.post('/userMessages_date/',
 		console.log(`get messages of:${req.body.user_id}, ${req.body.user_name}, ${req.body.from_date}, ${req.body.to_date}`);
 		res.status(200).send(messages.getUserMessagesFromDate(req.body.user_id,req.body.user_name, req.body.from_date, req.body.to_date));
 	});
+
+app.all('*',
+		(req, res, next) => {
+			console.log("runs for all HTTP verbs first");
+			res.status(200).send('Please refer to <a href=https://github.com/Eldad7/exercise1>API</a>');
+			next();
+		});
 
 
 
