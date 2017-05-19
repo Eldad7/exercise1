@@ -67,6 +67,9 @@ to_date String *Optional* - if you want to limit your results
 **Respone Example: **
 [{
 	{
+		 "_id": {
+        "$oid": "591d82d0734d1d38b5b70f1c"
+    	},
 		"user":{"name":"friend","id":123},
 		"recieved":{"date":"5/11/2017", "time":"14:45"},
 		"content":"Hey, it was very good seeing you!"
