@@ -13,32 +13,32 @@ class Messages{
 	}
 
 	getAllMessages(){
-		return user.find().exec().then(
+		return user.find().sort({"recieved.date":1,"recieved.time":1}).exec().then(
 			function(messages){
 				if (messages.length==0)
 					return {"000": 'No messages recieved yet!'};
 				console.log(messages);
-				return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
+				return messages;
 			});
 	}
 
 	getMessagesById(id){
-		return user.find({'user.id': id}).exec().then(
+		return user.find({'user.id': id}).sort({"recieved.date":1,"recieved.time":1}).exec().then(
 			function(messages){
 				if (messages.length==0)
 					return {"error id": '001',"error message": "UserID don't exist"};
 				console.log(messages);
-				return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
+				return messages;
 			});
 	}
 
 	getMessagesByUsername(username){
-		return user.find({'user.name': username}).exec().then(
+		return user.find({'user.name': username}).sort({"recieved.date":1,"recieved.time":1}).exec().then(
 			function(messages){
 				if (messages.length==0)
 					return {"error id": '002',"error message": "Username don't exist"};
 				console.log(messages);
-				return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
+				return messages;
 			});
 	}
 
@@ -50,52 +50,57 @@ class Messages{
 	getUserMessagesFromDate(id=null, username=null,fromDate,toDate=null, query){	//username, toDate - Optional 
 		switch (query){
 			case 1:
-				return user.find({"user.id":id,"recieved.date": {"$gte": fromDate, "$lte": toDate}}).exec().then(
-					function(messages){
-						if (messages.length==0)
-							return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
-						console.log(messages);
-						return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
-					});
+				return user.find({"user.id":id,"recieved.date": {"$gte": fromDate, "$lte": toDate}}).
+					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+						function(messages){
+							if (messages.length==0)
+								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
+							console.log(messages);
+							return messages;
+						});
 			case 2:
-				return user.find({"user.id":id,"recieved.date": {"$gte": fromDate}}).exec().then(
-					function(messages){
-						if (messages.length==0)
-							return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
-						console.log(messages);
-						return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
-					});
+				return user.find({"user.id":id,"recieved.date": {"$gte": fromDate}}).
+					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+						function(messages){
+							if (messages.length==0)
+								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
+							console.log(messages);
+							return messages;
+						});
 			case 3:
-				return user.find({"user.name":username,"recieved.date": {"$gte": fromDate, "$lte": toDate}}).exec().then(
-					function(messages){
-						if (messages.length==0)
-							return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
-						console.log(messages);
-						return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
-					});
+				return user.find({"user.name":username,"recieved.date": {"$gte": fromDate, "$lte": toDate}}).
+					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+						function(messages){
+							if (messages.length==0)
+								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
+							console.log(messages);
+							return messages;
+						});
 			case 4:
-				return user.find({"user.name":username,"recieved.date": {"$gte": fromDate}}).exec().then(
-					function(messages){
-						if (messages.length==0)
-							return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
-						console.log(messages);
-						return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
-					});
+				return user.find({"user.name":username,"recieved.date": {"$gte": fromDate}}).
+					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+						function(messages){
+							if (messages.length==0)
+								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
+							console.log(messages);
+							return messages;
+						});
 			case 5:
-				return user.find({"recieved.date": {"$gte": fromDate, "$lte": toDate}}).exec().then(
-					function(messages){
-						if (messages.length==0)
-							return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
-						console.log(messages);
-						return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
-					});
+				return user.find({"recieved.date": {"$gte": fromDate, "$lte": toDate}}).
+					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+						function(messages){
+							if (messages.length==0)
+								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
+							console.log(messages);
+							return messages;
+						});
 			case 6:
-				return user.find({"recieved.date": {"$gte": fromDate}}).exec().then(
+				return user.find({"recieved.date": {"$gte": fromDate}}).sort({"recieved.date":1,"recieved.time":1}).exec().then(
 					function(messages){
 						if (messages.length==0)
 							return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
 						console.log(messages);
-						return messages.sort(function (a,b){return (new Date(a.recieved.date + " " + a.recieved.time).getTime()) - (new Date(b.recieved.date + " " + b.recieved.time).getTime()) || a.user.id - b.user.id;})
+						return messages;
 					});
 		}
 
