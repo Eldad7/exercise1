@@ -13,7 +13,7 @@ class Messages{
 	}
 
 	getAllMessages(){
-		return user.find().sort({"recieved.date":1,"recieved.time":1}).exec().then(
+		return user.find().select({"_id":0}).sort({"user.id":1,"recieved.date":1,"recieved.time":1}).exec().then(
 			function(messages){
 				if (messages.length==0)
 					return {"000": 'No messages recieved yet!'};
@@ -23,7 +23,7 @@ class Messages{
 	}
 
 	getMessagesById(id){
-		return user.find({'user.id': id}).sort({"recieved.date":1,"recieved.time":1}).exec().then(
+		return user.find({'user.id': id}).select({"_id":0}).sort({"recieved.date":1,"recieved.time":1}).exec().then(
 			function(messages){
 				if (messages.length==0)
 					return {"error id": '001',"error message": "UserID don't exist"};
@@ -33,7 +33,8 @@ class Messages{
 	}
 
 	getMessagesByUsername(username){
-		return user.find({'user.name': username}).sort({"recieved.date":1,"recieved.time":1}).exec().then(
+		return user.find({'user.name': username}).select({"_id":0}).sort({"recieved.date":1,"recieved.time":1}).
+		exec().then(
 			function(messages){
 				if (messages.length==0)
 					return {"error id": '002',"error message": "Username don't exist"};
@@ -51,25 +52,25 @@ class Messages{
 		switch (query){
 			case 1:
 				return user.find({"user.id":id,"recieved.date": {"$gte": fromDate, "$lte": toDate}}).
-					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+					select({"_id":0}).sort({"user.id":1,"recieved.date":1,"recieved.time":1}).exec().then(
 						function(messages){
 							if (messages.length==0)
-								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
+								return {"error id": '002',"error message": "UserID incorrect or no messages for these dates"};
 							console.log(messages);
 							return messages;
 						});
 			case 2:
 				return user.find({"user.id":id,"recieved.date": {"$gte": fromDate}}).
-					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+					select({"_id":0}).sort({"user.id":1,"recieved.date":1,"recieved.time":1}).exec().then(
 						function(messages){
 							if (messages.length==0)
-								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
+								return {"error id": '002',"error message": "UserID incorrect or no messages for these dates"};
 							console.log(messages);
 							return messages;
 						});
 			case 3:
 				return user.find({"user.name":username,"recieved.date": {"$gte": fromDate, "$lte": toDate}}).
-					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+					select({"_id":0}).sort({"user.id":1,"recieved.date":1,"recieved.time":1}).exec().then(
 						function(messages){
 							if (messages.length==0)
 								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
@@ -78,7 +79,7 @@ class Messages{
 						});
 			case 4:
 				return user.find({"user.name":username,"recieved.date": {"$gte": fromDate}}).
-					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+					select({"_id":0}).sort({"user.id":1,"recieved.date":1,"recieved.time":1}).exec().then(
 						function(messages){
 							if (messages.length==0)
 								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
@@ -87,7 +88,7 @@ class Messages{
 						});
 			case 5:
 				return user.find({"recieved.date": {"$gte": fromDate, "$lte": toDate}}).
-					sort({"recieved.date":1,"recieved.time":1}).exec().then(
+					select({"_id":0}).sort({"user.id":1,"recieved.date":1,"recieved.time":1}).exec().then(
 						function(messages){
 							if (messages.length==0)
 								return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
@@ -95,7 +96,8 @@ class Messages{
 							return messages;
 						});
 			case 6:
-				return user.find({"recieved.date": {"$gte": fromDate}}).sort({"recieved.date":1,"recieved.time":1}).exec().then(
+				return user.find({"recieved.date": {"$gte": fromDate}}).select({"_id":0}).
+				sort({"user.id":1,"recieved.date":1,"recieved.time":1}).exec().then(
 					function(messages){
 						if (messages.length==0)
 							return {"error id": '002',"error message": "Username incorrect or no messages for these dates"};
